@@ -1,0 +1,18 @@
+services:
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: nginx-litellm-proxy
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - litellm
+    networks:
+      - coolify
+    restart: always
+
+networks:
+  coolify:
+    external: true
